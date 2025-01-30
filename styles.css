@@ -6,14 +6,13 @@ html, body {
 }
 
 body.loading {
-  overflow: hidden;
-  position: fixed; /* Prevent any bouncing/scrolling effects */
+  overflow-y: hidden; /* Only prevent vertical scrolling */
   width: 100%;
   background: #1e1e1e;
 }
 
 #loading {
-  position: fixed;
+  position: absolute; /* Change from fixed to absolute */
   top: 0;
   left: 0;
   right: 0;
@@ -25,9 +24,6 @@ body.loading {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
 }
 
 .terminal-loader {
@@ -121,19 +117,16 @@ body.loading {
 /* For mobile devices */
 @media screen and (max-width: 768px) {
   body {
-    position: fixed; /* Prevent bounce effect on mobile */
     width: 100%;
-    overflow: hidden;
   }
   
   #loading {
-    min-height: 100dvh; /* Ensure minimum height covers screen */
+    min-height: 100dvh;
   }
   
   .terminal-loader {
     width: 90%;
     padding: 15px;
-    transform: none; /* Remove any transform */
   }
 }
 
