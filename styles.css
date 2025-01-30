@@ -6,17 +6,16 @@ html, body {
 }
 
 body.loading {
-  overflow-y: hidden; /* Only prevent vertical scrolling */
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
   width: 100%;
   background: #1e1e1e;
 }
 
 #loading {
-  position: absolute; /* Change from fixed to absolute */
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100dvh;
   background: #1e1e1e;
@@ -26,7 +25,59 @@ body.loading {
   z-index: 1000;
 }
 
+#loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1e1e1e;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+/* Add animation container */
+.background-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.symbol {
+  position: absolute;
+  color: #0f0;
+  font-family: monospace;
+  font-size: 14px;
+  opacity: 0;
+  animation: fall 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
 .terminal-loader {
+  position: relative;
+  z-index: 2;
   width: 80%;
   max-width: 600px;
   background: #2d2d2d;
@@ -60,7 +111,6 @@ body.loading {
   height: 15px;
   border-radius: 50%;
 }
-
 
 .control.close { background: #ff5f56; }
 .control.minimize { background: #ffbd2e; }
@@ -269,6 +319,78 @@ body.loading {
 
 #contact a:hover {
   color: #00cc00; /* Darker green on hover */
+}
+
+.background-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.server-rack {
+    position: absolute;
+    width: 40px;
+    height: 80px;
+    background: #2a2a2a;
+    border: 1px solid #333;
+    animation: blink 2s infinite;
+}
+
+.code-window {
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 5px;
+    font-family: monospace;
+    font-size: 8px;
+    color: #00ff00;
+    overflow: hidden;
+    animation: typing 3s infinite;
+}
+
+.api-flow {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00ff00;
+    border-radius: 50%;
+    animation: flow 2s infinite;
+}
+
+.database {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    opacity: 0.5;
+    animation: pulse 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { box-shadow: 0 0 5px #00ff00; }
+    50% { box-shadow: 0 0 15px #00ff00; }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 120px; }
+}
+
+@keyframes flow {
+    0% { transform: translateX(0) translateY(0); opacity: 1; }
+    100% { transform: translateX(100px) translateY(100px); opacity: 0; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.7; }
 }
 
 
