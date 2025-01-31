@@ -3,11 +3,11 @@ html, body {
   margin: 0;
   padding: 0;
   background: #1e1e1e; /* Add background color to both html and body */
+  overflow: auto; /* Change back to auto to allow scrolling */
 }
 
 body.loading {
-  overflow-y: visible;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden; /* This will only apply during loading */
   width: 100%;
   background: #1e1e1e;
 }
@@ -17,12 +17,13 @@ body.loading {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100dvh;
+  height: 100vh;
   background: #1e1e1e;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: hidden; /* Add this to ensure no scrolling */
 }
 
 #loading::before {
@@ -183,32 +184,43 @@ body.loading {
 #home {
   text-align: center;
   padding: 100px 20px;
-  background: #1e1e1e; /* Dark background */
-  color: #ffffff; /* White text */
+  background: #1e1e1e;
+  color: #00ff00;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 #home h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  color: #00ff00;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 #home p {
   font-size: 1.2rem;
   margin-bottom: 20px;
+  color: #00ff00; /* Terminal green */
 }
 
 .button {
-  background: #00ff00; /* Green button */
-  color: #1e1e1e; /* Dark text */
+  background: transparent; /* Changed to transparent */
+  color: #00ff00; /* Terminal green */
   padding: 10px 20px;
+  border: 1px solid #00ff00; /* Added border */
   border-radius: 5px;
   text-decoration: none;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .button:hover {
-  background: #00cc00; /* Darker green on hover */
+  background: #00ff00; /* Green background on hover */
+  color: #1e1e1e; /* Dark text on hover */
 }
+
 #about {
   padding: 50px 20px;
   background: #2d2d2d; /* Slightly lighter dark background */
@@ -379,8 +391,8 @@ body.loading {
 }
 
 @keyframes typing {
-    from { width: 0; }
-    to { width: 120px; }
+  from { width: 0 }
+  to { width: 300px }  /* Increased width to fit text properly */
 }
 
 @keyframes flow {
@@ -393,6 +405,84 @@ body.loading {
     50% { transform: scale(1.1); opacity: 0.7; }
 }
 
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
 
+.wave {
+  display: inline-block;
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+}
 
+@keyframes blink {
+  0%, 100% { border-right-color: #00ff00 }
+  50% { border-right-color: transparent }
+}
+
+.typewriter-container {
+  display: inline-block;
+}
+
+.typewriter {
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  width: 0;
+  border-right: 2px solid #00ff00;
+  animation: 
+    typing 2s steps(20) forwards,
+    blink .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 300px }  /* Increased width to fit text properly */
+}
+
+@keyframes blink {
+  0%, 100% { border-right-color: #00ff00 }
+  50% { border-right-color: transparent }
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  border-right: 2px solid #00ff00;
+  animation: 
+    typing 2.5s steps(20) forwards,
+    blink 0.7s step-end infinite;
+  margin-left: 5px; /* Add some space after the wave */
+}
+
+h1 {
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  #home h1 {
+    font-size: 2rem;
+  }
+  
+  #home p {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #home h1 {
+    font-size: 1.5rem;
+  }
+}
 
